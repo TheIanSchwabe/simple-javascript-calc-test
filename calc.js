@@ -6,9 +6,10 @@ var answer;
 var equationType;
 var addingTo = true;
 var whichNumber = 'numberOne';
-var clearButton = 'AC'
+var clearButton = 'AC';
 var decimalAdded = false;
 var decimalPlaces = 1;
+var previousEquations = ["/ ","/ ","/ ","/ ","/ ","/ "];
 
 function UpdateDisplay () {
 	if (addingTo === false){
@@ -22,9 +23,18 @@ function UpdateDisplay () {
 	}
 	
 	document.getElementById("clear").innerHTML = clearButton;
+    document.getElementById("eq1").innerHTML = previousEquations[0];
+    document.getElementById("eq2").innerHTML = previousEquations[1];
+    document.getElementById("eq3").innerHTML = previousEquations[2];
+    document.getElementById("eq4").innerHTML = previousEquations[3];
+    document.getElementById("eq5").innerHTML = previousEquations[4];
+    document.getElementById("eq6").innerHTML = previousEquations[5];
 }
 
 function addANumber (derp){
+    if (addingTo == false){
+        return;
+    }
 	if (whichNumber === 'numberOne'){
 		if (decimalAdded == true){
 			decimalPlaces *= 10;
@@ -37,6 +47,9 @@ function addANumber (derp){
 			UpdateDisplay();
 			return;
 		}
+        if (clearButton === 'AC'){
+            clearButton = 'C';
+        }
 		numberOne *= 10;
 		if (numberOne < 0){
 			numberOne -= derp;
@@ -57,6 +70,9 @@ function addANumber (derp){
 			UpdateDisplay();
 			return;
 		}
+        if (clearButton === 'AC'){
+            clearButton = 'C';
+        }
 		numberTwo *= 10;
 		if (numberTwo < 0){
 			numberTwo -= derp;
@@ -107,10 +123,20 @@ function AllClear () {
 	answer = 0;
 	addingTo = true;
 	whichNumber = 'numberOne';
-	document.getElementById("whatyoudoin").innerHTML = " ";
+	document.getElementById("whatyoudoin").innerHTML = "*";
 	decimalAdded = false;
 	decimalPlaces = 1;
 	UpdateDisplay ();
+}
+
+function Percentage () {
+    if (whichNumber === 'numberOne'){
+        numberOne /= 100;
+    }
+    else if (whichNumber === 'numberTwo'){
+        numberTwo /= 100;
+    }
+    UpdateDisplay();
 }
 
 function Part2 (equation){
@@ -124,7 +150,7 @@ function Part2 (equation){
 	whichNumber = 'numberTwo';
 	clearButton = 'C';
 	equationType = equation;
-	document.getElementById("whatyoudoin").innerHTML = numberOne + " " + equationType;
+	document.getElementById("whatyoudoin").innerHTML = numberOne + " " + equationType + " *";
 	UpdateDisplay ();
 }
 
@@ -142,10 +168,11 @@ function Solve () {
 		else if (equationType === '÷'){
 			answer = numberOne / numberTwo;
 		}
+        LogEquation();
 		addingTo = false;
 		decimalAdded = false;
 		decimalPlaces = 1;
-		document.getElementById("whatyoudoin").innerHTML = " ";
+		document.getElementById("whatyoudoin").innerHTML = "*";
 		clearButton = 'AC';
 		UpdateDisplay();
 		
@@ -153,4 +180,14 @@ function Solve () {
 	else {
 		return;
 	}
+}
+
+function LogEquation () {
+    'use strict';
+    previousEquations[5] = previousEquations[4];
+    previousEquations[4] = previousEquations[3];
+    previousEquations[3] = previousEquations[2];
+    previousEquations[2] = previousEquations[1];
+    previousEquations[1] = previousEquations[0];
+    previousEquations[0] = '/ ' + numberOne + " " + equationType + " " + numberTwo + " = " + answer;
 }

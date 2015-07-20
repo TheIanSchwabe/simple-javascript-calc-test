@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>JavaScript Calculator!</title>
-		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href="bootstrap.css" rel="stylesheet">
     	<script src="respond.min.js"></script>
     	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="bootstrap.min.js"></script>
@@ -18,10 +18,15 @@
 				</div>
 				<div class="panel-body">
 					<div>
-						<p class="pull right" id="whatyoudoin"> </p>
+						<h3 class="" id="whatyoudoin">*</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
 						<h1 class="pull-right" id="livepreview">0</h1>
 					</div>
 				</div>
+                <div class="panel-body">
 				<div class="btn-group btn-group-justified" role="group">
 					<div class="btn-group" role="group">
 					<button type="button" class="btn btn-lg btn-primary" id="clear" onclick="Clear();">:P</button>
@@ -29,6 +34,9 @@
 					<div class="btn-group" role="group">
 					<button type="button" class="btn btn-lg btn-default btn-responsive" id="plusminus" onclick="ChangeSign();">+/-</button>
 					</div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-lg btn-default btn-responsive" id="percent" onclick="Percentage();">%</button>
+                    </div>
 					<div class="btn-group" role="group">
 					<button type="button" class="btn btn-lg btn-warning btn-responsive" id="divide" onclick="Part2('÷');">÷</button>
 					</div>
@@ -87,13 +95,30 @@
 					<button type="button" class="btn btn-lg btn-default btn-responsive" id="dot" onclick="AddDecimal ();">.</button>
 					</div>
 					<div class="btn-group" role="group">
-					<button type="button" class="btn btn-lg btn-default btn-responsive" id="equals" onclick="Solve ();">=</button>
+					<button type="button" class="btn btn-lg btn-success btn-responsive" id="equals" onclick="Solve ();">=</button>
 					</div>
 				</div>
-				<p></p>
-			</div>
-			</p>
-		</div>
+                </div>
+                <p></p>
+            </div>
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <p></p>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Previous Equations (6):</h4>
+                </div>
+                <div class="panel-body">
+                    <h4 id="eq1"></h4>
+                    <h4 id="eq2"></h4>
+                    <h4 id="eq3"></h4>
+                    <h4 id="eq4"></h4>
+                    <h4 id="eq5"></h4>
+                    <h4 id="eq6"></h4>
+                </div>
+            </div>
+        </div>
 		<script>UpdateDisplay ();</script>
 	</body>
 </html>

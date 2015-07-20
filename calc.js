@@ -1,3 +1,5 @@
+// JavaScript-based calculator with basic functions
+
 var numberOne = 0;
 var numberTwo = 0;
 var answer;
